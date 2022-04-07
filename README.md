@@ -1,15 +1,11 @@
 
-# DocumentCloud Add-On Example
+# DocumentCloud Add-On - Custom Metadata Scraper
 
-This repository contains an example Add-On for DocumentCloud.  It is designed
-to be copied and modified to allow one to easily write Add-Ons to bring custom
-functionality to DocumentCloud.
+This repository contains a metadata scraper Add-On for DocumentCloud. 
 
 ## Files
 
 ### addon.py
-
-This file is part of the `python-documentcloud` library.
 
 This file contains a base class `AddOn`, which implements shared functionality
 for all DocumentCloud Add-Ons to use.  In most cases, you should not need to
@@ -67,69 +63,13 @@ There are also some methods which provide useful functionality for an Add-On.
   email.  The content is plain text and does not currently support Markdown or
   HTML.
 
-The script also accepts command line options to allow for easier testing for
-development purposes. It requires your DocumentCloud username and password if
-the add-on requires authentication, which is used to fetch a refresh and access
-token.  They can be passed in as command line arguments (`--username` and
-`--password`), or in environment variables (`DC_USERNAME` and `DC_PASSWORD`).
-
-You can also pass in a list of document IDs (`--documents`), a search query
-(`--query`), and JSON parameters for your Add-On (`--data`) - be sure to
-properly quote your JSON at the command line.
-
-Example invocation:
-```
-python main.py --documents 123 --data '{"name": "World"}'
-```
-
 ### main.py
 
-This is the file to edit to implement your Add-On specific functionality.  You
-should define a class which inherits from `AddOn` from `addon.py`.  Then you
-can instantiate a new instance and call the main method, which is the entry
-point for your Add-On logic.  You may access the data parsed by `AddOn` as well
-as using the helper methods defined there.  The `HelloWorld` example Add-On
-demonstrates using many of these features.
+This is the file that implements the metadata scraping Add-On specific functionality.
+It contains the class `CustomMetaData` which inherits from `AddOn` from `addon.py`.
 
-If you need to add more files, remember to instantiate the main Add-On class
-from a file called `main.py` - that is what the GitHub action will call with
-the Add-On parameters upon being dispatched.
-
-### config.yaml
-
-This is a YAML file which defines the data your Add-On expects to receive.
-DocumentCloud will use it to show a corresponding form with the proper fields.
-It uses the [JSON Schema](https://json-schema.org/) format, but allows you to
-use YAML for convenience.  You may read more about JSON Schema, but here are
-the basics to get started:
-
-```yaml
-# The title is the title of your Add-On
-title: Hello World
-# The description will be shown above the form when activating the Add-On
-description: This is an updated simple test add-on
-# Type should always be object
-type: object
-# Properties are the fields for your form
-properties:
-  # the key is the name of the variable that will be returned to your code
-  name:
-    # the title is what will be shown as the form label
-    title: Name
-    # a string is text
-    type: string
-```
-
-At the top level you have the following properties:
-
-* `title` - The title for your Add-On
-* `description` - a description for your Add-On - will be displayed above the
-  form when someone runs the add-on
-* `type` - This should always be set to `object`
-* `properties` - This is an object describing the data fields your add-on accepts
-    * The name will be the name of the variable the data is returned in
-    * `title` - The label shown on the form for this field
-    * `type` - This may be `string`, `number` or `boolean`
+TODO: 
+- Figure out why query breaks
 
 ### requirements.txt
 
@@ -137,75 +77,70 @@ This is a standard `pip` `requirements.txt` file.  It allows you to specify
 python packages to be installed before running the Add-On.  You may add any
 dependencies your Add-On has here.  By default we install the
 `python-documentcloud` API library and the `requests` HTTP request package.
-You may upgrade the `python-documentcloud` version when new releases come out
-in order to take advantage of new features.
 
-### .github/workflows/run-addon.yml
+### testing
 
-This is the GitHub Actions configuration file for running the add-on.  It
-references a reusable workflow from the
-`MuckRock/documentcloud-addon-workflows` repository.  This workflow sets up
-python, installs dependencies and runs the `main.py` to start the Add-On. It
-accepts two inputs:
-* `timeout` - Number of minutes to time out.  The default is `5`.  You may
-  increase this if your add-on will run for longer than that.
-* `python-version` - The version of python you would like to use.  Defaults to `3.10`.
+This is a test runner script, which will allow you to easily pass data in the
+correct format into `main.py`, allowing you to run the Add-On locally, useful
+for development purposes.  It requires your DocumentCloud username and
+password, which is used to fetch an access token.  They can be passed in as
+command line arguments (`--username` and `--password`), or in environment
+variables (`DC_USERNAME` and `DC_PASSWORD`).
 
-To set an input:
-```yaml
-jobs:
-  Run-Add-On:
-    uses: MuckRock/documentcloud-addon-workflows/.github/workflows/update-config.yml@v1
-    with:
-      timeout: 30
+You can also pass in a list of document IDs (`--documents`), a search query
+(`--query`), and JSON parameters for your Add-On (`--params`) - be sure to
+properly quote your JSON at the command line.
+
+The index of the "choices" array tells the add on what data you want to scrape
+
+index 0: ID
+index 1: Title
+index 2: Privacy Level
+index 3: Asset URL
+index 4: Contributor
+index 5: Created At Date
+index 6: Description
+index 7: Full Text URL
+index 8: PDF URL 
+index 9: Page Count
+index 10: Tags
+index 11: Key Value Pairs
+
+Example invocation:
+```
+python3 main.py --documents 123 --username "..." --password "..." --data '{"choices": ["1", "0", "0", "1", "0", "1", "0", "0", "0", "0", "0", "1"]}'
 ```
 
-It is recommended you use the reusable workflow in order to receive future
-improvements to the workflow.  If needed you may fork the reusable workflow and
-edit it as needed. If you do edit it, you should leave the first step in place,
-which uses the UUID as its name, to allow DocumentCloud to identify the run.
+### .github/workflows/addons.yml
+
+This is the GitHub Actions configuration file.  We have a very simple workflow
+defined, which sets up python, installes dependencies and runs the `main.py` to
+start the Add-On.  It should not need to be edited in most cases, unless you
+have an advanced use case.  If you do edit it, you should leave the first step
+in place, which uses the UUID as its name, to allow DocumentCloud to identify
+the run.
 
 It would be possible to make a similar workflow for other programming languages
 if one wanted to write Add-Ons in a language besides Python.
-
-### .github/workflows/update-config.yml
-
-This is the GitHub Actions configuration file for updating the configuration
-file.  It references a reusable workflow from the
-`MuckRock/documentcloud-addon-workflows` repository.  This workflow sends a
-`POST` request to DocumentCloud whenever a new `config.yaml` file is pushed to
-the repository.  It accepts one input:
-* `url` - The base URL for the DocumentCloud API.  The default is
-  "https://api.www.documentcloud.org/api/".  It should only be changed if you
-  are running your own instance of DocumentCloud.
-
-### LICENSE
-
-The license this code is provided under, the 3-Clause BSD License
 
 ## Reference
 
 ### Full parameter reference
 
 This is a reference of all of the data passed in to the Add-On.  A single JSON
-object is passed in to `main.py` as a quoted string.  The `init` function
-parses this out and converts it to useful python objects for your `main`
-function to use.  The following are the top level keys in the object.
+object is passed in to `main.py` as a quoted string.  The `init` and
+`load_params` functions parse this out and convert it to useful python objects
+for your `main` function to use.  The following are the top level keys in the
+object.
 
 * `token` - An access token which will be valid for 5 minutes, giving you API
   access authorized as the user who activated the add-on.  The `init` function
   uses this value to configure the DocumentCloud client object.
 
-* `refresh_token` - A refresh token which will be valid for 1 day, giving you
-  API access to new refresh tokens when they expire.  The `init` function uses
-  this value to configure the DocumentCloud client object.
-
 * `base_uri` - This can be used to point the API server to other instances,
   such as our internal staging server.  It should not be used unless you are
   running your own instance of DocumentCloud.  It is also used in the
   initialization of the DocumentCloud client.
-
-* `auth_uri` - The corresponding `auth_uri` if a `base_uri` is specified.
 
 *  `documents` - This is the list of Document IDs which is passed in to `main`
 
