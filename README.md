@@ -93,18 +93,18 @@ properly quote your JSON at the command line.
 
 The index of the "choices" array tells the add on what data you want to scrape
 
-index 0: ID
-index 1: Title
-index 2: Privacy Level
-index 3: Asset URL
-index 4: Contributor
-index 5: Created At Date
-index 6: Description
-index 7: Full Text URL
-index 8: PDF URL 
-index 9: Page Count
-index 10: Tags
-index 11: Key Value Pairs
+index 0: ID  <br />
+index 1: Title <br />
+index 2: Privacy Level <br />
+index 3: Asset URL <br />
+index 4: Contributor <br />
+index 5: Created At Date <br />
+index 6: Description <br />
+index 7: Full Text URL <br />
+index 8: PDF URL  <br />
+index 9: Page Count <br />
+index 10: Tags <br />
+index 11: Key Value Pairs <br />
 
 Example invocation:
 ```
