@@ -33,8 +33,6 @@ class CustomMetaData(AddOn):
                 continue
             else:
                 sys.exit('ERROR: Please only enter zeros and ones into the list')
-
-        #print(values)
   
         self.set_message("Beginning custom metadata scraping!")
 
@@ -48,9 +46,6 @@ class CustomMetaData(AddOn):
         for head in header:
             if values[header.index(head)] == '1':
                 Newheader.append(head)
-
-        #print(Newheader)
-
 
         metadata_list = [] # list of lists containing metadata for each document
 
@@ -87,28 +82,28 @@ class CustomMetaData(AddOn):
         description = "NO DESCRIPTION PRESENT" #for the edge case with the description not existing
         if self.documents:
             length = len(self.documents)
-            for i, doc_id in enumerate(self.documents):
-                self.set_progress(100 * i // length)
+            for doc_id in enumerate(self.documents):
                 doc = self.client.documents.get(doc_id)
 
                 #set the metadata
                 metadata_list.append(setData(doc,[]))
         elif self.query:
+            i = 0
             documents = self.client.documents.search(self.query)
-            length = len(documents)
-            for i, doc in enumerate(documents):
-                self.set_progress(100 * i // length)
-                
-                #set the metadata
-                metadata_list.append(setData(doc,[]))
+            for document in documents:
+                # set the metadata
+                metadata_list.append(setData(document,[]))
+                i+=1
+            length = i
 
-        #go through the accumulated data and delete the data you do not want 
-        Newdatalist = [[]]
-        for data in metadata_list[0]:
-            if values[metadata_list[0].index(data)] == '1':
-                Newdatalist[0].append(data)
-
-        #print(Newdatalist)
+        #go through the accumulated data and delete the data the user does not want 
+        Newdatalist = []
+        for document_data in metadata_list:
+            wantedData = []
+            for data in document_data:
+                if values[document_data.index(data)] == '1':
+                    wantedData.append(data)
+            Newdatalist.append(wantedData)
 
         # the id of the first document + how many more documents will be the name of the file
         try:
