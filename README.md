@@ -68,9 +68,6 @@ There are also some methods which provide useful functionality for an Add-On.
 This is the file that implements the metadata scraping Add-On specific functionality.
 It contains the class `CustomMetaData` which inherits from `AddOn` from `addon.py`.
 
-TODO: 
-- Figure out why query breaks
-
 ### requirements.txt
 
 This is a standard `pip` `requirements.txt` file.  It allows you to specify
