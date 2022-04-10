@@ -1,7 +1,7 @@
 
 # DocumentCloud Add-On - Custom Metadata Scraper
 
-This repository contains a metadata scraper Add-On for DocumentCloud. 
+This repository contains a custo, metadata scraper Add-On for DocumentCloud. 
 
 ## Files
 
@@ -91,24 +91,33 @@ You can also pass in a list of document IDs (`--documents`), a search query
 (`--query`), and JSON parameters for your Add-On (`--params`) - be sure to
 properly quote your JSON at the command line.
 
-The index of the "choices" array tells the add on what data you want to scrape
+Simply enter the data you would like to scrape into the "choices" data array. You do not have to worry about capitalization, but each type must be spelled correctly with no spaces.
+As of April 2022, the current document data types are supported,
 
-index 0: ID  <br />
-index 1: Title <br />
-index 2: Privacy Level <br />
-index 3: Asset URL <br />
-index 4: Contributor <br />
-index 5: Created At Date <br />
-index 6: Description <br />
-index 7: Full Text URL <br />
-index 8: PDF URL  <br />
-index 9: Page Count <br />
-index 10: Tags <br />
-index 11: Key Value Pairs <br />
+"id"
+"title"
+"privacy level"
+"asset url"
+"contributor"
+"created at date"
+"description"
+"full text url"
+"pdf url"
+"page count"
+"tags"
+"key value pairs"
 
-Example invocation:
+Example invocations:
 ```
-python3 main.py --documents 123 --username "..." --password "..." --data '{"choices": ["1", "0", "0", "1", "0", "1", "0", "0", "0", "0", "0", "1"]}'
+python main.py --documents 123 --username "..." --password "..." --data '{"choices": ["ID", "Title", "PrivacyLevel", "AssetUrl", "Contributor", "CreatedAtDate", "Description", "FullTextUrl", "PdfUrl", "PageCount", "Tags", "KeyValuePairs"]}'
+```
+
+```
+python main.py --documents 123 --username "..." --password "..." --data '{"choices": ["Contributor", "FullTextUrl", "PdfUrl", "KeyValuePairs"]}'
+```
+
+```
+python main.py --documents 123 --username "..." --password "..." --data '{"choices": ["ID", "CreatedAtDate"]}'
 ```
 
 ### .github/workflows/addons.yml
