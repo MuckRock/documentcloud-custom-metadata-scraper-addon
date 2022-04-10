@@ -91,18 +91,18 @@ properly quote your JSON at the command line.
 Simply enter the data you would like to scrape into the "choices" data array. You do not have to worry about capitalization, but each type must be spelled correctly with no spaces.
 As of April 2022, the current document data types are supported,
 
-"id"
-"title"
-"privacy level"
-"asset url"
-"contributor"
-"created at date"
-"description"
-"full text url"
-"pdf url"
-"page count"
-"tags"
-"key value pairs"
+"id"  <br />
+"title"  <br />
+"privacy level"  <br />
+"asset url"  <br />
+"contributor"  <br />
+"created at date"  <br />
+"description"  <br />
+"full text url"  <br />
+"pdf url"  <br />
+"page count"  <br />
+"tags" <br />
+"key value pairs" <br />
 
 Example invocations:
 ```
