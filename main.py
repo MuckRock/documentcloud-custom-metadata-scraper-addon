@@ -147,7 +147,8 @@ class CustomMetaData(AddOn):
                 writer.writerow(row)
             
             self.upload_file(file_)
-
+            file_.seek(0)
+            print(file_.read())
         self.set_message("Custom metadata scraping end!")
 
 
