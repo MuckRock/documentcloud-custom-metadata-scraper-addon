@@ -14,10 +14,41 @@ documents:
 # Properties are the fields for your form
 properties:
   # the key is the name of the variable that will be returned to your code
-  name:
-    # the title is what will be shown as the form label
-    title: Name
-    # a string is text
-    type: string
+  choices:
+    title: ID
+    type: boolean
+
+    title: Title
+    type: boolean
+
+    title: Privacy Level
+    type: boolean
+
+    title: Asset-Url
+    type: boolean
+
+    title: Contributor
+    type: boolean
+
+    title: Created at Date
+    type: boolean
+
+    title: Description
+    type: boolean
+
+    title: Full Text Url
+    type: boolean
+
+    title: Pdf Url
+    type: boolean
+
+    title: Page Count
+    type: boolean
+
+    title: Tags
+    type: boolean
+
+    title: Key Value Pairs
+    type: boolean
 
 
