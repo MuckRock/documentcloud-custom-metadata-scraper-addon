@@ -10,65 +10,41 @@ import sys
 from documentcloud.addon import AddOn
 import csv
 
+
 class CustomMetaData(AddOn):
     """An metadata scraping Add-On for DocumentCloud."""
 
     def main(self):
         """The main add-on functionality goes here."""
-
         #fetch your add-on specific data
-        fullnames = self.data.get("choices")
 
-        #make sure there is actually an input
-        if len(fullnames) == 0:
-            sys.exit('ERROR: no data fields present')
+        #get boolean array
+        values = self.data.get("choices")
 
-        #error checking
-        for name in fullnames:
-            if name.upper() not in ["ID", "TITLE", "PRIVACYLEVEL", "ASSETURL", "CONTRIBUTOR", "CREATEDATDATE", "DESCRIPTION", "FULLTEXTURL", "PDFURL", "PAGECOUNT", "TAGS", "KEYVALUEPAIRS"]:
-                sys.exit('ERROR: Please only enter valid document data fields')
+        #make sure the array is of the right size 
+        if (len(values) < 12):
+            sys.exit('ERROR: Not enough arguments, every document data type should have an argument')
+        elif (len(values) > 12):
+            sys.exit('ERROR: Too many arguments')
 
-        #take all inputted metadata categories and deal with multiple entries
-        values = [0] * 12
-        for data in fullnames:
-            if data.upper() == "ID":
-                values[0] = 1
-            elif data.upper() == "TITLE":
-                values[1] = 1
-            elif data.upper() == "PRIVACYLEVEL":
-                values[2] = 1
-            elif data.upper() == "ASSETURL":
-                values[3] = 1
-            elif data.upper() == "CONTRIBUTOR":
-                values[4] = 1
-            elif data.upper() == "CREATEDATDATE":
-                values[5] = 1
-            elif data.upper() == "DESCRIPTION":
-                values[6] = 1
-            elif data.upper() == "FULLTEXTURL":
-                values[7] = 1
-            elif data.upper() == "PDFURL":
-                values[8] = 1
-            elif data.upper() == "PAGECOUNT":
-                values[9] = 1
-            elif data.upper() == "TAGS":
-                values[10] = 1
-            elif data.upper() == "KEYVALUEPAIRS":
-                values[11] = 1
+        #make sure only 1s and 0s are being inputeted
+        for value in values:
+            if value == '0' or value == '1':
+                continue
+            else:
+                sys.exit('ERROR: Please only enter zeros and ones into the list')
   
-        self.set_message("Beginning custom metadata scraping!")
+        # self.set_message("Beginning custom metadata scraping!")
 
         # preset header + metadata list
-        header = ['id', 'title', 'privacy level', 'asset url', 
+        header = ['id', 'title', 'privacy level', 'asset-url', 
         'contributor', 'created at date', 'description' ,'full text url', 'pdf url',
         'page count', 'Tags', 'Key Value Pairs']
 
         #delete values of 0 from the header because the user does not want them 
         Newheader = []
         for head in header:
-
-            #differentiate data types by index
-            if values[header.index(head)] == 1:
+            if values[header.index(head)] == '1':
                 Newheader.append(head)
 
         metadata_list = [] # list of lists containing metadata for each document
@@ -106,7 +82,9 @@ class CustomMetaData(AddOn):
         description = "NO DESCRIPTION PRESENT" #for the edge case with the description not existing
         if self.documents:
             length = len(self.documents)
-            for doc_id in enumerate(self.documents):
+            for doc_id in self.documents:
+            # for doc_id in enumerate(self.documents):
+                # print(doc_id)
                 doc = self.client.documents.get(doc_id)
 
                 #set the metadata
@@ -120,12 +98,12 @@ class CustomMetaData(AddOn):
                 i+=1
             length = i
 
-        #go through the accumulated data and delete the data the user does not want from EACH document
+        #go through the accumulated data and delete the data the user does not want 
         Newdatalist = []
         for document_data in metadata_list:
             wantedData = []
             for data in document_data:
-                if values[document_data.index(data)] == 1:
+                if values[document_data.index(data)] == '1':
                     wantedData.append(data)
             Newdatalist.append(wantedData)
 
@@ -147,9 +125,8 @@ class CustomMetaData(AddOn):
                 writer.writerow(row)
             
             self.upload_file(file_)
-            file_.seek(0)
-            print(file_.read())
-        self.set_message("Custom metadata scraping end!")
+
+        # self.set_message("Custom metadata scraping end!")
 
 
 if __name__ == "__main__":
