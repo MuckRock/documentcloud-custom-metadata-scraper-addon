@@ -15,8 +15,8 @@ documents:
 properties:
   # the key is the name of the variable that will be returned to your code
   choices:
-    title: ID
-    type: boolean
+    title: ID, Title
+    type: boolean, boolean
 
     title: Title
     type: boolean
