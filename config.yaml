@@ -15,40 +15,40 @@ documents:
 properties:
   # the key is the name of the variable that will be returned to your code
   choices:
-    title: ID, Title
+    title: ID, title
     type: boolean, boolean
 
-    title: Title
-    type: boolean
+    # title: Title
+    # type: boolean
 
-    title: Privacy Level
-    type: boolean
+    # title: Privacy Level
+    # type: boolean
 
-    title: Asset-Url
-    type: boolean
+    # title: Asset-Url
+    # type: boolean
 
-    title: Contributor
-    type: boolean
+    # title: Contributor
+    # type: boolean
 
-    title: Created at Date
-    type: boolean
+    # title: Created at Date
+    # type: boolean
 
-    title: Description
-    type: boolean
+    # title: Description
+    # type: boolean
 
-    title: Full Text Url
-    type: boolean
+    # title: Full Text Url
+    # type: boolean
 
-    title: Pdf Url
-    type: boolean
+    # title: Pdf Url
+    # type: boolean
 
-    title: Page Count
-    type: boolean
+    # title: Page Count
+    # type: boolean
 
-    title: Tags
-    type: boolean
+    # title: Tags
+    # type: boolean
 
-    title: Key Value Pairs
-    type: boolean
+    # title: Key Value Pairs
+    # type: boolean
 
 
