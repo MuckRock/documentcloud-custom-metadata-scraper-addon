@@ -7,48 +7,57 @@ type: object
 # How does this add-on accept documents
 # If more than one type is specified, the user will be prompted to choose one
 documents:
-  # By the current search query
-  - query
   # By the currently selected documents
   - selected
 # Properties are the fields for your form
 properties:
   # the key is the name of the variable that will be returned to your code
-  choices:
-    title: ID, title
-    type: boolean, boolean
+  ID:
+    title: ID
+    type: boolean
 
-    # title: Title
-    # type: boolean
+  Title:
+    title: Title
+    type: boolean
 
-    # title: Privacy Level
-    # type: boolean
+  Privacy Level:
+    title: Privacy Level
+    type: boolean
 
-    # title: Asset-Url
-    # type: boolean
+  Asset-Url:
+    title: Asset-Url
+    type: boolean
 
-    # title: Contributor
-    # type: boolean
+  Contributor:
+    title: Contributor
+    type: boolean
 
-    # title: Created at Date
-    # type: boolean
+  Created at Date:
+    title: Created at Date
+    type: boolean
 
-    # title: Description
-    # type: boolean
+  Description:
+    title: Description
+    type: boolean
 
-    # title: Full Text Url
-    # type: boolean
+  Full Text Url:
+    title: Full Text Url
+    type: boolean
 
-    # title: Pdf Url
-    # type: boolean
+  Pdf Url:
+    title: Pdf Url
+    type: boolean
 
-    # title: Page Count
-    # type: boolean
+  Page Count:
+    title: Page Count
+    type: boolean
 
-    # title: Tags
-    # type: boolean
+  Tags:
+    title: Tags
+    type: boolean
 
-    # title: Key Value Pairs
-    # type: boolean
+  Key Value Pairs:
+    title: Key Value Pairs
+    type: boolean
 
 
