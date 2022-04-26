@@ -20,7 +20,13 @@ Page Count <br />
 Tags <br />
 Key Value Pairs <br />
 
-Example invocation:
+Example invocations:
 ```
 python3 main.py --documents 123 --username "..." --password "..." --data '{"ID": true, "TITLE": true, "PRIVACYLEVEL": true, "ASSETURL": true, "CONTRIBUTOR": true, "CREATEDATDATE": true,  "DESCRIPTION": false, "FULLTEXTURL": true, "PDFURL": false, "PAGECOUNT": true, "TAGS": true, "KEYVALUEPAIRS": false}' 
+```
+```
+python3 main.py --documents 123 --username "..." --password "..." --data '{"ID": true, "TITLE": true, "PRIVACYLEVEL": true}' 
+```
+```
+python3 main.py --documents 123 --username "..." --password "..." --data '{"CREATEDATDATE": true,  "DESCRIPTION": false, "FULLTEXTURL": true' 
 ```
