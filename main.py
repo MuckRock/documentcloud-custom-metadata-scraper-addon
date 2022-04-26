@@ -25,32 +25,32 @@ class CustomMetaData(AddOn):
         #parse through and set the index value in the values array to 1 for every wanted data type 
         values = [0] * 12
         for data in self.data:
-            if data == "ID" and self.data.get(data) == True:
-                values[0] = 1
-            elif data == "TITLE" and self.data.get(data) == True:
-                values[1] = 1
-            elif data == "PRIVACYLEVEL" and self.data.get(data) == True:
-                values[2] = 1
-            elif data == "ASSETURL" and self.data.get(data) == True:
-                values[3] = 1
-            elif data == "CONTRIBUTOR" and self.data.get(data) == True:
-                values[4] = 1
-            elif data == "CREATEDATDATE" and self.data.get(data) == True:
-                values[5] = 1
-            elif data == "DESCRIPTION" and self.data.get(data) == True:
-                values[6] = 1
-            elif data == "FULLTEXTURL" and self.data.get(data) == True:
-                values[7] = 1
-            elif data == "PDFURL" and self.data.get(data) == True:
-                values[8] = 1
-            elif data == "PAGECOUNT" and self.data.get(data) == True:
-                values[9] = 1
-            elif data == "TAGS" and self.data.get(data) == True:
-                values[10] = 1
-            elif data == "KEYVALUEPAIRS" and self.data.get(data) == True:
-                values[11] = 1
+            if self.data.get(data) == True:
+                if data == "ID":
+                    values[0] = 1
+                elif data == "TITLE":
+                    values[1] = 1
+                elif data == "PRIVACYLEVEL":
+                    values[2] = 1
+                elif data == "ASSETURL":
+                    values[3] = 1
+                elif data == "CONTRIBUTOR":
+                    values[4] = 1
+                elif data == "CREATEDATDATE":
+                    values[5] = 1
+                elif data == "DESCRIPTION":
+                    values[6] = 1
+                elif data == "FULLTEXTURL":
+                    values[7] = 1
+                elif data == "PDFURL":
+                    values[8] = 1
+                elif data == "PAGECOUNT":
+                    values[9] = 1
+                elif data == "TAGS":
+                    values[10] = 1
+                elif data == "KEYVALUEPAIRS":
+                    values[11] = 1
   
-    
         # preset header + metadata list
         header = ['Id', 'Title', 'Privacy Level', 'Asset-Url', 
         'Contributor', 'Created at Date', 'Description' ,'Full-Text-Url', 'Pdf-Url',
