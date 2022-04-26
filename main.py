@@ -19,31 +19,37 @@ class CustomMetaData(AddOn):
             return
 
         self.set_message("Custom MetaData scraping starting!")
-
-        MD1 = self.data.get("ID")
-        MD2 = self.data.get("TITLE")
-        MD3 = self.data.get("PRIVACYLEVEL")
-        MD4 = self.data.get("ASSETURL")
-        MD5 = self.data.get("CONTRIBUTOR")
-        MD6 = self.data.get("CREATEDATDATE")
-        MD7 = self.data.get("DESCRIPTION")
-        MD8 = self.data.get("FULLTEXTURL")
-        MD9 = self.data.get("PDFURL")
-        MD10 = self.data.get("PAGECOUNT")
-        MD11 = self.data.get("TAGS")
-        MD12 = self.data.get("KEYVALUEPAIRS")
-
-        fullnames = [] * 12
-        for MD in self.data:
-            fullnames.append(self.data.get(MD))
-
-        #take all inputted metadata categories and deal with multiple entries
+        
+        #getting the input from the frontend, it will be a dictionary of variable length
+        #containing the data types the user wants
+        #parse through and set the index value in the values array to 1 for every wanted data type 
         values = [0] * 12
-        for i in range(len(fullnames)):
-            if fullnames[i] == True:
-                values[i] = 1
-            else:
-                values[i] = 0
+        for data in self.data:
+            if data == "ID" and self.data.get(data) == True:
+                values[0] = 1
+            elif data == "TITLE" and self.data.get(data) == True:
+                values[1] = 1
+            elif data == "PRIVACYLEVEL" and self.data.get(data) == True:
+                values[2] = 1
+            elif data == "ASSETURL" and self.data.get(data) == True:
+                values[3] = 1
+            elif data == "CONTRIBUTOR" and self.data.get(data) == True:
+                values[4] = 1
+            elif data == "CREATEDATDATE" and self.data.get(data) == True:
+                values[5] = 1
+            elif data == "DESCRIPTION" and self.data.get(data) == True:
+                values[6] = 1
+            elif data == "FULLTEXTURL" and self.data.get(data) == True:
+                values[7] = 1
+            elif data == "PDFURL" and self.data.get(data) == True:
+                values[8] = 1
+            elif data == "PAGECOUNT" and self.data.get(data) == True:
+                values[9] = 1
+            elif data == "TAGS" and self.data.get(data) == True:
+                values[10] = 1
+            elif data == "KEYVALUEPAIRS" and self.data.get(data) == True:
+                values[11] = 1
+  
     
         # preset header + metadata list
         header = ['id', 'title', 'privacy level', 'asset url', 
@@ -133,7 +139,7 @@ class CustomMetaData(AddOn):
                 writer.writerow(row)
             
             self.upload_file(file_)
-            
+
         self.set_message("Custom MetaData scraping finished!")
 
 if __name__ == "__main__":
