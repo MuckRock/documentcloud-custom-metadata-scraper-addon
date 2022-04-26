@@ -1,14 +1,11 @@
 
 # DocumentCloud Add-On - Custom Metadata Scraper
 
-This repository contains a custom metadata scraper add-on for DocumentCloud. The user can check which data types they would like to scrape, and the addon <br />
-will fetch that specific data and compile the result/s into a csv  
+This repository contains a custom metadata scraper add-on for DocumentCloud. The user can check which data types they would like to scrape,and the addon will fetch that specific data and compile the result/s into a csv  
 
 ### testing
 
-The data passed into the add-on is a dictionary of variable length (depends on the data selected) with the keys being the different document data types and <br />
-their values being booleans. Currently, the following document data types are supported:
-
+The data passed into the add-on is a dictionary of variable length (depends on the data selected) with the keys being the different document data types and their values being booleans. Currently, the following document data types are supported:
 
 ID  <br />
 Title <br />
