@@ -52,9 +52,9 @@ class CustomMetaData(AddOn):
   
     
         # preset header + metadata list
-        header = ['id', 'title', 'privacy level', 'asset url', 
-        'contributor', 'created at date', 'description' ,'full text url', 'pdf url',
-        'page count', 'Tags', 'Key Value Pairs']
+        header = ['Id', 'Title', 'Privacy Level', 'Asset-Url', 
+        'Contributor', 'Created at Date', 'Description' ,'Full-Text-Url', 'Pdf-Url',
+        'Page Count', 'Tags', 'Key Value Pairs']
 
         #delete values of 0 from the header because the user does not want them 
         Newheader = []
@@ -123,12 +123,12 @@ class CustomMetaData(AddOn):
 
         # the id of the first document + how many more documents will be the name of the file
         try:
-            firstTitle = metadata_list[0][1]
+            firstID = metadata_list[0][0]
         except IndexError:
-            firstTitle = ""
+            firstID = ""
             length = 1
 
-        with open("metadata_for-"+str(firstTitle)+"-_+"+str(length-1)+".csv", "w+") as file_:
+        with open("data_for_"+str(firstID)+"+"+str(length-1)+".csv", "w+") as file_:
             writer = csv.writer(file_)
 
             #FORMAT HEADER
