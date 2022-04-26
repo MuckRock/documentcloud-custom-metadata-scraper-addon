@@ -1,7 +1,7 @@
 # The title is the title of your Add-On
 title: Custom Metadata
 # The description will be shown above the form when activating the Add-On
-description: enter which type of document data you would like to retrieve
+description: Select the document data you would like to retrieve
 # Type should always be object
 type: object
 # How does this add-on accept documents
@@ -16,47 +16,47 @@ properties:
     title: ID
     type: boolean
 
-  Title:
+  TITLE:
     title: Title
     type: boolean
 
-  Privacy Level:
+  PRIVACYLEVEL:
     title: Privacy Level
     type: boolean
 
-  Asset-Url:
+  ASSETURL:
     title: Asset-Url
     type: boolean
 
-  Contributor:
+  CONTRIBUTOR:
     title: Contributor
     type: boolean
 
-  Created at Date:
+  CREATEDATDATE:
     title: Created at Date
     type: boolean
 
-  Description:
+  DESCRIPTION:
     title: Description
     type: boolean
 
-  Full Text Url:
+  FULLTEXTURL:
     title: Full Text Url
     type: boolean
 
-  Pdf Url:
-    title: Pdf Url
+  PDFURL:
+    title: Pdf-Url
     type: boolean
 
-  Page Count:
+  PAGECOUNT:
     title: Page Count
     type: boolean
 
-  Tags:
+  TAGS:
     title: Tags
     type: boolean
 
-  Key Value Pairs:
+  KEYVALUEPAIRS:
     title: Key Value Pairs
     type: boolean
 

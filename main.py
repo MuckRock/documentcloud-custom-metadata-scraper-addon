@@ -10,41 +10,51 @@ import sys
 from documentcloud.addon import AddOn
 import csv
 
-
 class CustomMetaData(AddOn):
     """An metadata scraping Add-On for DocumentCloud."""
+    def main(self):     
 
-    def main(self):
-        """The main add-on functionality goes here."""
-        #fetch your add-on specific data
+        if not self.documents:
+            self.set_message("Please select at least one document")
+            return
 
-        #get boolean array
-        values = self.data.get("choices")
+        self.set_message("Custom MetaData scraping starting!")
 
-        #make sure the array is of the right size 
-        if (len(values) < 12):
-            sys.exit('ERROR: Not enough arguments, every document data type should have an argument')
-        elif (len(values) > 12):
-            sys.exit('ERROR: Too many arguments')
+        MD1 = self.data.get("ID")
+        MD2 = self.data.get("TITLE")
+        MD3 = self.data.get("PRIVACYLEVEL")
+        MD4 = self.data.get("ASSETURL")
+        MD5 = self.data.get("CONTRIBUTOR")
+        MD6 = self.data.get("CREATEDATDATE")
+        MD7 = self.data.get("DESCRIPTION")
+        MD8 = self.data.get("FULLTEXTURL")
+        MD9 = self.data.get("PDFURL")
+        MD10 = self.data.get("PAGECOUNT")
+        MD11 = self.data.get("TAGS")
+        MD12 = self.data.get("KEYVALUEPAIRS")
 
-        #make sure only 1s and 0s are being inputeted
-        for value in values:
-            if value == '0' or value == '1':
-                continue
+        fullnames = [] * 12
+        for MD in self.data:
+            fullnames.append(self.data.get(MD))
+
+        #take all inputted metadata categories and deal with multiple entries
+        values = [0] * 12
+        for i in range(len(fullnames)):
+            if fullnames[i] == True:
+                values[i] = 1
             else:
-                sys.exit('ERROR: Please only enter zeros and ones into the list')
-  
-        # self.set_message("Beginning custom metadata scraping!")
-
+                values[i] = 0
+    
         # preset header + metadata list
-        header = ['id', 'title', 'privacy level', 'asset-url', 
+        header = ['id', 'title', 'privacy level', 'asset url', 
         'contributor', 'created at date', 'description' ,'full text url', 'pdf url',
         'page count', 'Tags', 'Key Value Pairs']
 
         #delete values of 0 from the header because the user does not want them 
         Newheader = []
         for head in header:
-            if values[header.index(head)] == '1':
+            #differentiate data types by index
+            if values[header.index(head)] == 1:
                 Newheader.append(head)
 
         metadata_list = [] # list of lists containing metadata for each document
@@ -83,8 +93,6 @@ class CustomMetaData(AddOn):
         if self.documents:
             length = len(self.documents)
             for doc_id in self.documents:
-            # for doc_id in enumerate(self.documents):
-                # print(doc_id)
                 doc = self.client.documents.get(doc_id)
 
                 #set the metadata
@@ -98,12 +106,12 @@ class CustomMetaData(AddOn):
                 i+=1
             length = i
 
-        #go through the accumulated data and delete the data the user does not want 
+        #go through the accumulated data and delete the data the user does not want from EACH document
         Newdatalist = []
         for document_data in metadata_list:
             wantedData = []
             for data in document_data:
-                if values[document_data.index(data)] == '1':
+                if values[document_data.index(data)] == 1:
                     wantedData.append(data)
             Newdatalist.append(wantedData)
 
@@ -125,9 +133,8 @@ class CustomMetaData(AddOn):
                 writer.writerow(row)
             
             self.upload_file(file_)
-
-        # self.set_message("Custom metadata scraping end!")
-
+            
+        self.set_message("Custom MetaData scraping finished!")
 
 if __name__ == "__main__":
     CustomMetaData().main()
