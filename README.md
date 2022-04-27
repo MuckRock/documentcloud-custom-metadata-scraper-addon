@@ -3,8 +3,6 @@
 
 This repository contains the "Custom Metadata Scraper" add-on for DocumentCloud. The user can check which data types they would like to scrape and the add-on will fetch that specific data and compile the results into a csv that can then be downloaded  
 
-## Files
-
 ### testing
 
 The data passed into the add-on is a dictionary of variable length (depends on the data selected) with the keys being the different document data types and their values being booleans. Currently, the following document data types are supported:
@@ -32,6 +30,7 @@ python3 main.py --documents 123 --username "..." --password "..." --data '{"ID":
 ```
 python3 main.py --documents 123 --username "..." --password "..." --data '{"CREATEDATDATE": true,  "DESCRIPTION": false, "FULLTEXTURL": true' 
 ```
+## Files
 
 ### main.py
 
