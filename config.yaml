@@ -1,5 +1,5 @@
 # The title is the title of your Add-On
-title: Custom MetaData Extractor
+title: Custom Metadata Scraper
 # The description will be shown above the form when activating the Add-On
 description: Select the document data you would like to retrieve
 # Type should always be object
