@@ -59,4 +59,5 @@ properties:
   KEYVALUEPAIRS:
     title: Key Value Pairs
     type: boolean
-
+categories:
+  - export
