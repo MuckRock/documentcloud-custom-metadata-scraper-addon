@@ -25,7 +25,7 @@ class CustomMetaData(AddOn):
         # getting the input from the frontend, it will be a dictionary of variable length
         # containing the data types the user wants
         # parse through and set the index value in the values array to 1 for every wanted data type
-        key_order = ["ID", "TITLE", "ACCESSLEVEL", "ASSETURL", "CONTRIBUTOR", "CREATEDATDATE", "DESCRIPTION", "FULLTEXTURL", "PDFURL", "PAGECOUNT", "TAGS", "KEYVALUEPAIRS"]
+        key_order = ["ID", "TITLE", "ACCESSLEVEL", "CANONICALURL", "CONTRIBUTOR", "CREATEDATDATE", "DESCRIPTION", "FULLTEXTURL", "PDFURL", "PAGECOUNT", "TAGS", "KEYVALUEPAIRS"]
         values = [1 if self.data.get(data) == True and data in self.data else 0 for data in key_order]
 
         # preset header + metadata list
@@ -33,7 +33,7 @@ class CustomMetaData(AddOn):
             "ID",
             "Title",
             "Access Level",
-            "Asset URL",
+            "Canonical URL",
             "Contributor",
             "Created at Date",
             "Description",
@@ -66,7 +66,7 @@ class CustomMetaData(AddOn):
                 doc.id,
                 doc.title,
                 doc.access,
-                doc.asset_url,
+                doc.canonical_url,
                 doc.contributor,
                 doc.created_at,
                 description,
