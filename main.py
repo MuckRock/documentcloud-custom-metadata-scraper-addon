@@ -16,42 +16,17 @@ class CustomMetaData(AddOn):
 
     def main(self):
 
-        if not self.documents:
-            self.set_message("Please select at least one document")
+        if self.get_document_count() is None:
+            self.set_message("Please select at least one document.")
             return
 
-        self.set_message("Custom MetaData scraping starting!")
+        self.set_message("Custom metadata scraper starting!")
 
         # getting the input from the frontend, it will be a dictionary of variable length
         # containing the data types the user wants
         # parse through and set the index value in the values array to 1 for every wanted data type
-        values = [0] * 12
-        for data in self.data:
-            if self.data.get(data) == True:
-                if data == "ID":
-                    values[0] = 1
-                elif data == "TITLE":
-                    values[1] = 1
-                elif data == "PRIVACYLEVEL":
-                    values[2] = 1
-                elif data == "ASSETURL":
-                    values[3] = 1
-                elif data == "CONTRIBUTOR":
-                    values[4] = 1
-                elif data == "CREATEDATDATE":
-                    values[5] = 1
-                elif data == "DESCRIPTION":
-                    values[6] = 1
-                elif data == "FULLTEXTURL":
-                    values[7] = 1
-                elif data == "PDFURL":
-                    values[8] = 1
-                elif data == "PAGECOUNT":
-                    values[9] = 1
-                elif data == "TAGS":
-                    values[10] = 1
-                elif data == "KEYVALUEPAIRS":
-                    values[11] = 1
+        key_order = ["ID", "TITLE", "PRIVACYLEVEL", "ASSETURL", "CONTRIBUTOR", "CREATEDATDATE", "DESCRIPTION", "FULLTEXTURL", "PDFURL", "PAGECOUNT", "TAGS", "KEYVALUEPAIRS"]
+        values = [1 if self.data.get(data) == True and data in self.data else 0 for data in key_order]
 
         # preset header + metadata list
         header = [
