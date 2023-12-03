@@ -22,11 +22,11 @@ properties:
     type: boolean
 
   PRIVACYLEVEL:
-    title: Privacy Level
+    title: Access Level
     type: boolean
 
   ASSETURL:
-    title: Asset-Url
+    title: Asset URL
     type: boolean
 
   CONTRIBUTOR:
@@ -42,11 +42,11 @@ properties:
     type: boolean
 
   FULLTEXTURL:
-    title: Full Text Url
+    title: Full Text URL
     type: boolean
 
   PDFURL:
-    title: Pdf-Url
+    title: PDF URL
     type: boolean
 
   PAGECOUNT:
@@ -58,7 +58,7 @@ properties:
     type: boolean
 
   KEYVALUEPAIRS:
-    title: Key Value Pairs
+    title: Key/Value Pairs
     type: boolean
 categories:
   - export
