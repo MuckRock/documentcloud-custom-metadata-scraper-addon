@@ -14,8 +14,8 @@ properties:
   ACCESSLEVEL:
     title: Access Level
     type: boolean
-  ASSETURL:
-    title: Asset URL
+  CANONICALURL:
+    title: Canonical URL (The URL where the document is hosted on DocumentCloud)
     type: boolean
   CONTRIBUTOR:
     title: Contributor
