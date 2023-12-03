@@ -9,6 +9,7 @@ type: object
 documents:
   # By the currently selected documents
   - selected
+  - query
 # Properties are the fields for your form
 properties:
   # the key is the name of the variable that will be returned to your code
