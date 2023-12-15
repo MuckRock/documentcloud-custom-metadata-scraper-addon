@@ -1,5 +1,5 @@
 title: Custom Metadata Scraper
-description: Select the document data you would like to retrieve
+description: Export a customized list of metadata from a set of documents. 
 type: object
 documents:
   - selected
